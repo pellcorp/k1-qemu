@@ -1,4 +1,4 @@
 *.qcow2
-initrd
-kernel
+initrd.img
+vmlinux
 qemu.tar.gz

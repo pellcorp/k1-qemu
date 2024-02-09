@@ -62,15 +62,15 @@ mkdir -p "$DIR"/root/.ssh
 cat keys/ssh_user_*.pub > "$DIR"/root/.ssh/authorized_keys
 cp keys/ssh_user_*_key "$DIR"
 
-ln -L "$DIR"/vmlinux "$DIR"/kernel
-ln -L "$DIR"/initrd.img "$DIR"/initrd
+# fixme - no idea why it loses the path this time!!!
+chroot "$DIR" bash -c "PATH=/bin:/sbin:/usr/bin:/usr/sbin update-initramfs -k all -c"
 
 echo "Creating qemu.tar.gz ..."
 
 virt-make-fs --format=qcow2 --size=10G --partition=gpt --type=ext4 --label=rootfs $DIR/ image.qcow2
 qemu-img convert -f qcow2 image.qcow2 -O qcow2 image2.qcow2
 mv image2.qcow2 image.qcow2
-cp $DIR/kernel .
-cp $DIR/initrd .
-tar -zcvf qemu.tar.gz kernel initrd image.qcow2
+cp $DIR/vmlinux .
+cp $DIR/initrd.img .
+tar -zcvf qemu.tar.gz vmlinux initrd.img image.qcow2
 
