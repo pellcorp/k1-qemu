@@ -20,7 +20,8 @@ unset LC_ADDRESS
 unset LC_MONETARY
 unset LC_TIME
 
-DIR=/home/jason/debinst
+# FIXME - hard coded for now
+DIR=/var/tmp/debinst
 
 rm -rf $DIR
 mkdir $DIR
