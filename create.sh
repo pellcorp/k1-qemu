@@ -61,7 +61,7 @@ echo 'PermitRootLogin yes' > "$DIR"/etc/ssh/sshd_config.d/permit_root.conf
 mkdir -p "$DIR"/root/.ssh
 cat keys/ssh_user_*.pub > "$DIR"/root/.ssh/authorized_keys
 cp keys/ssh_user_*_key "$DIR"
-
+cp chroot.sh "$DIR"/root
 # fixme - no idea why it loses the path this time!!!
 chroot "$DIR" bash -c "PATH=/bin:/sbin:/usr/bin:/usr/sbin update-initramfs -k all -c"
 
