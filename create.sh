@@ -43,7 +43,8 @@ chroot "$DIR" apt-get update
 chroot "$DIR" apt-get install -y --no-install-recommends locales
 sed -i '/en_US.UTF-8/s/^# //;/en_US.UTF-8/s/^# //' "$DIR"/etc/locale.gen
 chroot "$DIR" /usr/sbin/locale-gen
-echo "LANG=en_US.UTF-8\nLANGUAGE=en_US.UTF-8" > "$DIR"/etc/default/locale
+echo "LANG=en_US.UTF-8" > "$DIR"/etc/default/locale
+echo "LANGUAGE=en_US.UTF-8" >> "$DIR"/etc/default/locale
 chroot "$DIR" apt-get install -y --no-install-recommends openssh-server squashfs-tools
 
 echo "Installing kernel ..."
