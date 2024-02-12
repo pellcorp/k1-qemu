@@ -1,5 +1,9 @@
 # Building qemu image
 
+## Host Preparation
+
+You will need qemu, qemu-user-static and qemu-user-static-binfmt or equivalent
+
 ```
 sudo ./create.sh
 ```
