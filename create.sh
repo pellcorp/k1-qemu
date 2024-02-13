@@ -68,7 +68,7 @@ else
 fi
 
 echo "Overriding some scripts ..."
-cp $CURRENT_DIR/gen_sn_mac.sh "$DIR"/usr/bin/
+cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/usr/bin/
 cp "$DIR"/sbin/reboot "$DIR"/sbin/reboot.old
 cp "$DIR"/usr/bin/find "$DIR"/usr/bin/find.old
 cp "$DIR"/bin/rm "$DIR"/bin/rm.old
@@ -76,12 +76,13 @@ cp $CURRENT_DIR/script "$DIR"/sbin/reboot
 cp $CURRENT_DIR/script "$DIR"/bin/rm
 cp $CURRENT_DIR/script "$DIR"/usr/bin/find
 
-#echo "Creating qemu.tar.gz ..."
-
+echo "Creating qemu drive image ..."
 virt-make-fs --format=qcow2 --size=8G --partition=mbr --type=ext4 --label=rootfs $DIR/ image.qcow2 || exit $?
 qemu-img convert -f qcow2 image.qcow2 -O qcow2 image2.qcow2 || exit $?
 mv image2.qcow2 image.qcow2
 cp $DIR/vmlinux .
 cp $DIR/initrd.img .
+
+#echo "Creating qemu.tar.gz ..."
 #tar -zcvf qemu.tar.gz vmlinux initrd.img image.qcow2
 
