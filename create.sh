@@ -5,6 +5,8 @@ if [ "$(whoami)" != "root" ]; then
   exit 1
 fi
 
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd -P)"
+
 ls /proc/sys/fs/binfmt_misc/qemu-mipsel > /dev/null 2>&1
 if [ $? -ne 0 ]; then
   echo "The /proc/sys/fs/binfmt_misc/qemu-mipsel is missing, seems like you got work to do!"
@@ -50,27 +52,31 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends systemd procps polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
+chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
 
-mkdir -p "$DIR"/etc/network/
-#echo "Setting up ssh ..."
-#ln -s /dev/null "$DIR"/etc/systemd/network/99-default.link
-#cp interfaces "$DIR"/etc/network/
-cp resolv.conf "$DIR"/etc
-#cp "$DIR"/usr/share/sysvinit/inittab "$DIR"/etc/inittab
-#sed -i 's,^NO_START=1,NO_START=0,' /etc/default/dropbear
+cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 
-#cp keys/ssh_host_* "$DIR"/etc/ssh
-#chmod 600 "$DIR"/etc/ssh/ssh_host_*_key
-#echo 'PermitRootLogin yes' >> "$DIR"/etc/ssh/sshd_config
-#mkdir -p "$DIR"/root/.ssh
-#cat keys/ssh_user_*.pub > "$DIR"/root/.ssh/authorized_keys
-#cp keys/ssh_user_*_key "$DIR"
-cp chroot.sh "$DIR"/root
 # fixme - no idea why it loses the path this time!!!
 chroot "$DIR" bash -c "PATH=/bin:/sbin:/usr/bin:/usr/sbin update-initramfs -k all -c" || exit $?
 
-echo "Creating qemu.tar.gz ..."
+if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
+  mkdir -p "$DIR"/root/rootfs
+  unsquashfs -d "$DIR"/root/rootfs $CURRENT_DIR/rootfs.squashfs
+  cp $CURRENT_DIR/chroot.sh "$DIR"/root
+else
+  echo "rootfs.squashfs not found!"
+fi
+
+echo "Overriding some scripts ..."
+cp $CURRENT_DIR/gen_sn_mac.sh "$DIR"/usr/bin/
+cp "$DIR"/sbin/reboot "$DIR"/sbin/reboot.old
+cp "$DIR"/usr/bin/find "$DIR"/usr/bin/find.old
+cp "$DIR"/bin/rm "$DIR"/bin/rm.old
+cp $CURRENT_DIR/script "$DIR"/sbin/reboot
+cp $CURRENT_DIR/script "$DIR"/bin/rm
+cp $CURRENT_DIR/script "$DIR"/usr/bin/find
+
+#echo "Creating qemu.tar.gz ..."
 
 virt-make-fs --format=qcow2 --size=8G --partition=mbr --type=ext4 --label=rootfs $DIR/ image.qcow2 || exit $?
 qemu-img convert -f qcow2 image.qcow2 -O qcow2 image2.qcow2 || exit $?

@@ -3,3 +3,4 @@ initrd.img
 vmlinux
 vmlinux.elf
 qemu.tar.gz
+rootfs.squashfs
