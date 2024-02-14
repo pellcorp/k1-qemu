@@ -9,10 +9,11 @@
  
 sudo chown $USER image.qcow2 initrd.img vmlinux
 
-NET_DEV="-device e1000,netdev=net"
-NET_DEVICE="-netdev user,id=net,hostfwd=tcp::2222-:22"
-
 # FIXME - I am not sure how to setup tab based networking :-(
+# so just forward a bunch of the ports we need
+NET_DEV="-device e1000,netdev=net"
+NET_DEVICE="-netdev user,id=net,hostfwd=tcp::2222-:22,hostfwd=tcp::9999-:9999,hostfwd=tcp::4408-:4408,hostfwd=tcp::4407-:4407,hostfwd=tcp::8080-:80"
+
 #NET_DEV="-netdev tap,id=tapnet,ifname=tap0,script=no"
 #NET_DEVICE="-device e1000,netdev=tapnet"
 

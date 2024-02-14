@@ -63,18 +63,18 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   mkdir -p "$DIR"/root/rootfs
   unsquashfs -d "$DIR"/root/rootfs $CURRENT_DIR/rootfs.squashfs
   cp $CURRENT_DIR/chroot.sh "$DIR"/root
+  
+  echo "Overriding some scripts ..."
+  cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
+  cp "$DIR"/sbin/reboot "$DIR"/root/rootfs/sbin/reboot.old
+  cp "$DIR"/usr/bin/find "$DIR"/root/rootfs/usr/bin/find.old
+  cp "$DIR"/bin/rm "$DIR"/root/rootfs/bin/rm.old
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/sbin/reboot
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/bin/rm
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/usr/bin/find
 else
   echo "rootfs.squashfs not found!"
 fi
-
-echo "Overriding some scripts ..."
-cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/usr/bin/
-cp "$DIR"/sbin/reboot "$DIR"/sbin/reboot.old
-cp "$DIR"/usr/bin/find "$DIR"/usr/bin/find.old
-cp "$DIR"/bin/rm "$DIR"/bin/rm.old
-cp $CURRENT_DIR/script "$DIR"/sbin/reboot
-cp $CURRENT_DIR/script "$DIR"/bin/rm
-cp $CURRENT_DIR/script "$DIR"/usr/bin/find
 
 echo "Creating qemu drive image ..."
 virt-make-fs --format=qcow2 --size=8G --partition=mbr --type=ext4 --label=rootfs $DIR/ image.qcow2 || exit $?
