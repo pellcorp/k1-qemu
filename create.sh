@@ -57,10 +57,9 @@ chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
-# fixme - no idea why it loses the path this time!!!
-chroot "$DIR" bash -c "PATH=/bin:/sbin:/usr/bin:/usr/sbin update-initramfs -k all -c" || exit $?
 
 if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
+  echo "Extracting firmware rootfs.squashfs to $DIR/root/rootfs ..."
   mkdir -p "$DIR"/root/rootfs
   unsquashfs -d "$DIR"/root/rootfs $CURRENT_DIR/rootfs.squashfs
   cp $CURRENT_DIR/chroot.sh "$DIR"/root
