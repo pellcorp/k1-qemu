@@ -52,10 +52,11 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
+chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client
 
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 
+chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 # fixme - no idea why it loses the path this time!!!
 chroot "$DIR" bash -c "PATH=/bin:/sbin:/usr/bin:/usr/sbin update-initramfs -k all -c" || exit $?
 
@@ -67,9 +68,12 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Overriding some scripts ..."
   cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/script
-#  cp $CURRENT_DIR/script "$DIR"/root/rootfs/sbin/reboot
-#  cp $CURRENT_DIR/script "$DIR"/root/rootfs/bin/rm
-#  cp $CURRENT_DIR/script "$DIR"/root/rootfs/usr/bin/find
+  rm "$DIR"/root/rootfs/sbin/reboot
+  rm "$DIR"/root/rootfs/bin/rm
+  rm "$DIR"/root/rootfs/usr/bin/find
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/sbin/reboot
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/bin/rm
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/usr/bin/find
 else
   echo "rootfs.squashfs not found!"
 fi
@@ -84,5 +88,4 @@ cp $DIR/initrd.img .
 #echo "Creating qemu.tar.gz ..."
 #rm qemu.tar.gz
 #tar -zcvf qemu.tar.gz start.sh vmlinux initrd.img image.qcow2
-
 
