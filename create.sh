@@ -52,7 +52,7 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
+chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
 
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 
@@ -84,5 +84,7 @@ cp $DIR/vmlinux .
 cp $DIR/initrd.img .
 
 #echo "Creating qemu.tar.gz ..."
-#tar -zcvf qemu.tar.gz vmlinux initrd.img image.qcow2
+#rm qemu.tar.gz
+#tar -zcvf qemu.tar.gz start.sh vmlinux initrd.img image.qcow2
+
 

@@ -24,3 +24,4 @@ https://gitlab.com/giomasce/dqib/-/blob/d64002db448f4f3012183841cddbded6aed670d9
 
 https://starkeblog.com/qemu/u-boot/bootloader/2021/01/20/qemu-system-execute-raw-binary-u-boot-image.html
 
+

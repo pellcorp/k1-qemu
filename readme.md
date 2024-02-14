@@ -19,6 +19,7 @@ sudo ./create.sh
 Login as ssh and do:
 
 ```
+#ifconfig enp0s19 192.168.5.12 up
 cd ~
 ./chroot.sh
 ```
