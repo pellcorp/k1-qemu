@@ -52,7 +52,7 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
+chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client squashfs-tools linux-image-4kc-malta
 
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 
@@ -66,12 +66,10 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   
   echo "Overriding some scripts ..."
   cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
-  cp "$DIR"/sbin/reboot "$DIR"/root/rootfs/sbin/reboot.old
-  cp "$DIR"/usr/bin/find "$DIR"/root/rootfs/usr/bin/find.old
-  cp "$DIR"/bin/rm "$DIR"/root/rootfs/bin/rm.old
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/sbin/reboot
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/bin/rm
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/usr/bin/find
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/script
+#  cp $CURRENT_DIR/script "$DIR"/root/rootfs/sbin/reboot
+#  cp $CURRENT_DIR/script "$DIR"/root/rootfs/bin/rm
+#  cp $CURRENT_DIR/script "$DIR"/root/rootfs/usr/bin/find
 else
   echo "rootfs.squashfs not found!"
 fi
