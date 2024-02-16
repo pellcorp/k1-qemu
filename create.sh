@@ -67,12 +67,7 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Overriding some scripts ..."
   cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/script
-  rm "$DIR"/root/rootfs/sbin/reboot
-  rm "$DIR"/root/rootfs/bin/rm
-  rm "$DIR"/root/rootfs/usr/bin/find
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/sbin/reboot
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/bin/rm
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/usr/bin/find
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/script.sh
 else
   echo "rootfs.squashfs not found!"
 fi
