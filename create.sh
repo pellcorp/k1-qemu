@@ -67,7 +67,7 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Overriding some scripts ..."
   cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/script
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/script.sh
+  cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/script.sh
 else
   echo "rootfs.squashfs not found!"
 fi
@@ -80,6 +80,6 @@ cp $DIR/vmlinux .
 cp $DIR/initrd.img .
 
 #echo "Creating qemu.tar.gz ..."
-#rm qemu.tar.gz
-#tar -zcvf qemu.tar.gz start.sh vmlinux initrd.img image.qcow2
+rm qemu.tar.gz
+tar -zcvf qemu.tar.gz start.sh vmlinux initrd.img image.qcow2
 
