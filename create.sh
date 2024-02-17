@@ -64,8 +64,8 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   unsquashfs -d "$DIR"/root/rootfs $CURRENT_DIR/rootfs.squashfs
   cp $CURRENT_DIR/chroot.sh "$DIR"/root
   
-  echo "Overriding some scripts ..."
   cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
+
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/script
   cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/script.sh
 else

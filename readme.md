@@ -19,8 +19,23 @@ sudo ./create.sh
 Login as ssh and do:
 
 ```
-#ifconfig enp0s19 192.168.5.12 up
 cd ~
 ./chroot.sh
 ```
+
+# Default Config
+
+You can get the creality firmware to setup basic printer data by running:
+
+```
+/etc/init.d/S55klipper_service start
+```
+
+# Startup NGINX and Moonraker
+
+```
+/etc/init.d/S50nginx start
+/etc/init.d/S56moonraker_service start
+```
+
 
