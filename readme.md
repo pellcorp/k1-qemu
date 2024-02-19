@@ -11,7 +11,7 @@ sudo ./create.sh
 ## Running it
 
 ```
-./start.sh
+sudo ./start.sh
 ```
 
 ## Chroot K1 Firmware rootfs
