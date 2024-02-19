@@ -55,7 +55,6 @@ chroot "$DIR" apt-get update
 chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client
 
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
-
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 
 if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
@@ -66,8 +65,10 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   
   cp $CURRENT_DIR/get_sn_mac.sh "$DIR"/root/rootfs/usr/bin/
 
-  cp $CURRENT_DIR/script "$DIR"/root/rootfs/script
-  cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/script.sh
+  cp $CURRENT_DIR/script "$DIR"/root/rootfs/root/script
+  cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/root/script.sh
+  cp $CURRENT_DIR/curl "$DIR"/root/rootfs/root/curl
+  cp $CURRENT_DIR/init.sh "$DIR"/root/rootfs/root/init.sh
 else
   echo "rootfs.squashfs not found!"
 fi
@@ -82,4 +83,3 @@ cp $DIR/initrd.img .
 #echo "Creating qemu.tar.gz ..."
 rm qemu.tar.gz
 tar -zcvf qemu.tar.gz start.sh vmlinux initrd.img image.qcow2
-

@@ -31,11 +31,6 @@ You can get the creality firmware to setup basic printer data by running:
 /etc/init.d/S55klipper_service start
 ```
 
-# Startup NGINX and Moonraker
+## Console too narrow?
 
-```
-/etc/init.d/S50nginx start
-/etc/init.d/S56moonraker_service start
-```
-
-
+After `./chroot.sh`, run the `resize` command

@@ -10,6 +10,4 @@ mount -t devpts none /root/rootfs/dev/pts
 rm /root/rootfs/etc/resolv.conf
 cp /etc/resolv.conf /root/rootfs/etc/resolv.conf
 
-resize
 chroot /root/rootfs /bin/ash
-
