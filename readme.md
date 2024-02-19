@@ -10,12 +10,13 @@ The rootfs.squashfs needs to be obtained from the k1 firmware, here is an exampl
 
 ```
 wget https://file2-cdn.creality.com/file/0c96dc76c1455460ef66a8adaa367902/CR4CU220812S11_ota_img_V1.3.3.5.img
-7z x CR4CU220812S11_ota_img_V1.3.3.5.img -p'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+7z x CR4CU220812S11_ota_img_V1.3.3.5.img -p"$(cat ~/.k1/firmware.password)"
 cat CR4CU220812S11_ota_img_V1.3.3.5/ota_v1.3.3.5/rootfs.squashfs.* > rootfs.squashfs
 rm -rf CR4CU220812S11_ota_img_V1.3.3.5
+rm CR4CU220812S11_ota_img_V1.3.3.5.img
 ```
 
-The 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX' may vary depending on the firmware, left as an exercise for the user to figure it out
+The '~/.k1/firmware.password' may vary depending on the firmware, left as an exercise for the user to figure it out!
 
 ### Create the Image
 
