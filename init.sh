@@ -14,13 +14,13 @@ echo "Starting nginx and moonraker..."
 /etc/init.d/S56moonraker_service start
 
 echo "Waiting for moonraker to start ..."
-# when using chroot inside qemu localhost does not resolve correctly but 127.0.0.1 does
 while true; do
-  MRK_KPY_OK=`curl 127.0.0.1:7125/server/info | jq .result.klippy_connected`
+  MRK_KPY_OK=`curl localhost:7125/server/info | jq .result.klippy_connected`
   if [ "$MRK_KPY_OK" = "true" ]; then
     break;
   fi
-  sleep 1
+  sleep 10
 done
 
 # sh -c "GS_RESTART_KLIPPER=y GS_DECREALITY=y $(wget --no-check-certificate -qO - https://raw.githubusercontent.com/pellcorp/guppyscreen/jp_configure_confirm_install/installer.sh)"
+

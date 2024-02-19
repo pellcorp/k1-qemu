@@ -16,6 +16,7 @@ fi
 LANG=en_US.UTF-8
 LANGUAGE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
+# this is because manjaro defines all these envs and causes issues!
 unset LC_PAPER
 unset LC_NUMERIC
 unset LC_IDENTIFICATION
@@ -32,7 +33,6 @@ DIR=/var/tmp/debinst
 rm -rf $DIR
 mkdir $DIR
 
-# ,openssh-server,squashfs-tools,
 echo "Creating base in $DIR ..."
 debootstrap --foreign --arch mipsel --variant minbase --include=locales bookworm $DIR http://ftp.au.debian.org/debian/ || exit $?
 
