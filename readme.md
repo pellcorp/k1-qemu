@@ -19,7 +19,6 @@ sudo ./create.sh
 Login as ssh and do:
 
 ```
-cd ~
 ./chroot.sh
 ```
 
