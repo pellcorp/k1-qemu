@@ -13,6 +13,11 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+rm vmlinux
+rm initrd.img
+rm image.qcow2
+rm image.qcow2
+
 LANG=en_US.UTF-8
 LANGUAGE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
@@ -67,8 +72,6 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
 
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/root/script
   cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/root/script.sh
-  cp $CURRENT_DIR/curl "$DIR"/root/rootfs/root/curl
-  cp $CURRENT_DIR/init.sh "$DIR"/root/rootfs/root/init.sh
 else
   echo "rootfs.squashfs not found!"
 fi

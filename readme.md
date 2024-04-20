@@ -9,11 +9,11 @@ You will need qemu, qemu-user-static and qemu-user-static-binfmt or equivalent a
 The rootfs.squashfs needs to be obtained from the k1 firmware, here is an example of how to get it:
 
 ```
-wget https://file2-cdn.creality.com/file/0c96dc76c1455460ef66a8adaa367902/CR4CU220812S11_ota_img_V1.3.3.5.img
-7z x CR4CU220812S11_ota_img_V1.3.3.5.img -p"$(cat ~/.k1/firmware.password)"
-cat CR4CU220812S11_ota_img_V1.3.3.5/ota_v1.3.3.5/rootfs.squashfs.* > rootfs.squashfs
-rm -rf CR4CU220812S11_ota_img_V1.3.3.5
-rm CR4CU220812S11_ota_img_V1.3.3.5.img
+wget https://file2-cdn.creality.com/file/4ba071338e120558283f884266f9250d/CR4CU220812S11_ota_img_V1.3.3.8.img
+7z x CR4CU220812S11_ota_img_V1.3.3.8.img -p"$(cat ~/.k1/firmware.password)"
+cat CR4CU220812S11_ota_img_V1.3.3.8/ota_v1.3.3.8/rootfs.squashfs.* > rootfs.squashfs
+rm -rf CR4CU220812S11_ota_img_V1.3.3.8
+rm CR4CU220812S11_ota_img_V1.3.3.8.img
 ```
 
 The '~/.k1/firmware.password' may vary depending on the firmware, left as an exercise for the user to figure it out!
