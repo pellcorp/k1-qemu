@@ -83,6 +83,6 @@ mv image2.qcow2 image.qcow2
 cp $DIR/vmlinux .
 cp $DIR/initrd.img .
 
-#echo "Creating qemu.tar.gz ..."
+echo "Creating qemu.tar.gz ..."
 rm qemu.tar.gz
-tar -zcvf qemu.tar.gz start.sh vmlinux initrd.img image.qcow2
+tar -zcvf qemu.tar.gz vmlinux initrd.img image.qcow2
