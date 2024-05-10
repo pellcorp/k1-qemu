@@ -9,7 +9,7 @@ if [ "$1" = "facade" ]; then
   busybox cp /root/script /sbin/reboot
   busybox cp /root/script /bin/rm
   busybox cp /root/script /bin/cp
-  busybox cp /root/script /bin/find
+  busybox cp /root/script /usr/bin/find
 elif [ "$1" = "restore" ]; then
   busybox ln -sf /bin/busybox /sbin/reboot
   busybox ln -sf /bin/busybox /bin/rm
