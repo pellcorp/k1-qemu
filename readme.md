@@ -1,18 +1,36 @@
 # Building qemu image
 
-## Host Preparation
+
+## Prerequisites
 
 You will need qemu, qemu-user-static and qemu-user-static-binfmt or equivalent and unsquashfs
 
-### K1 Firmware 
+### Recreate Rootfs from Firmware
 
-Use the download-firmware.sh script
+You will need a linux machine with the following commands available, something like ubuntu or arch is fine:
+
+- p7zip (7z command)
+- wget
+- unsquashfs
+- mksquashfs
+
+The packages on ubuntu can be installed like so:
+
+```
+sudo apt-get install p7zip squashfs-tools wget
+```
+
+Don't try and create this on windows or MacOs, you could do it on a ubuntu vm no problem
+
 
 ### Create the Image
 
 ```
-sudo ./create.sh
+export K1_FIRMWARE_PASSWORD='the password from a certain discord'
+sudo -E ./create.sh
 ```
+
+**NOTE:** You will be required to enter your `sudo` password
 
 ## Running it
 

@@ -13,10 +13,51 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-rm vmlinux
-rm initrd.img
-rm image.qcow2
-rm image.qcow2
+# recreate the rootfs
+if [ ! -f $CURRENT_DIR/rootfs.squashfs ]; then
+  if [ -z "$K1_FIRMWARE_PASSWORD" ]; then
+      echo "Creality K1 firmware password not defined, did you forget to: "
+      echo "export K1_FIRMWARE_PASSWORD='the password from a certain discord'"
+      exit 1
+  fi
+
+  commands="7z unsquashfs mksquashfs"
+  for command in $commands; do
+      command -v "$command" > /dev/null
+      if [ $? -ne 0 ]; then
+          echo "Command $command not found"
+          exit 1
+      fi
+  done
+
+  download="https://github.com/pellcorp/downloads/raw/main/creality/k1/firmware/CR4CU220812S11_ota_img_V6.1.3.3.8.img"
+  filename="CR4CU220812S11_ota_img_V6.1.3.3.8.img"
+  directory="CR4CU220812S11_ota_img_V6.1.3.3.8"
+  sub_directory="ota_v6.1.3.3.8"
+
+  if [ ! -f /tmp/$filename ]; then
+      echo "Downloading $download -> /tmp/$filename ..."
+      wget "$download" -O /tmp/$filename || exit $?
+  fi
+
+  if [ -d /tmp/$directory ]; then
+      rm -rf /tmp/$directory
+  fi
+
+  7z x /tmp/$filename -p"$K1_FIRMWARE_PASSWORD" -o/tmp || exit $?
+  cat /tmp/$directory/$sub_directory/rootfs.squashfs.* > $CURRENT_DIR/rootfs.squashfs || exit $?
+  rm -rf /tmp/$directory
+fi
+
+if [ -f vmlinux ]; then
+  rm vmlinux 
+fi
+if [ -f initrd.img ]; then
+  rm initrd.img
+fi
+if [ -f image.qcow2 ]; then
+  rm image.qcow2
+fi
 
 LANG=en_US.UTF-8
 LANGUAGE=en_US.UTF-8
@@ -61,6 +102,7 @@ chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps
 
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
+
 
 if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Extracting firmware rootfs.squashfs to $DIR/root/rootfs ..."
