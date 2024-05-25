@@ -103,7 +103,6 @@ chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 
-
 if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Extracting firmware rootfs.squashfs to $DIR/root/rootfs ..."
   mkdir -p "$DIR"/root/rootfs
@@ -114,6 +113,9 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
 
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/root/script
   cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/root/script.sh
+  
+  # automatically chroot upon login
+  echo "./chroot.sh" >> "$DIR"/root/.bashrc
 else
   echo "rootfs.squashfs not found!"
 fi
