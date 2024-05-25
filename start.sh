@@ -5,6 +5,10 @@ if [ "$(whoami)" == "root" ]; then
   exit 1
 fi
 
+# if we want to start from scratch
+if [ "$1" = "-r" ]; then
+    tar -xvf qemu.tar.gz
+fi
 sudo chown $USER image.qcow2 initrd.img vmlinux
 
 # FIXME - I am not sure how to setup tab based networking :-(
