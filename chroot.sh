@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Chrooting to CrealityOS rootfs..."
+
 mount -o bind /dev /root/rootfs/dev
 mount -t proc /proc /root/rootfs/proc
 mount -o bind /sys /root/rootfs/sys

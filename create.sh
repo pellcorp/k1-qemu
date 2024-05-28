@@ -104,9 +104,7 @@ cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 
 # disable a crap ton of timers
-rm "$DIR"/etc/systemd/system/timers.target.wants/apt-daily.timer
-rm "$DIR"/etc/systemd/system/timers.target.wants/apt-daily-upgrade.timer
-rm "$DIR"/usr/lib/apt/apt.systemd.daily.timer
+rm "$DIR"/etc/systemd/system/*.timer
 rm "$DIR"/lib/systemd/system/apt-daily.service
 rm "$DIR"/lib/systemd/system/apt-daily.timer
 rm "$DIR"/lib/systemd/system/apt-daily-upgrade.service
