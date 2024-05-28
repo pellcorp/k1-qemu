@@ -98,7 +98,7 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends dropbear systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client
+chroot "$DIR" apt-get install -y --no-install-recommends systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client
 
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
