@@ -103,6 +103,23 @@ chroot "$DIR" apt-get install -y --no-install-recommends systemd procps vim-tiny
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 
+# disable a crap ton of timers
+rm "$DIR"/etc/systemd/system/timers.target.wants/apt-daily.timer
+rm "$DIR"/etc/systemd/system/timers.target.wants/apt-daily-upgrade.timer
+rm "$DIR"/usr/lib/apt/apt.systemd.daily.timer
+rm "$DIR"/lib/systemd/system/apt-daily.service
+rm "$DIR"/lib/systemd/system/apt-daily.timer
+rm "$DIR"/lib/systemd/system/apt-daily-upgrade.service
+rm "$DIR"/lib/systemd/system/apt-daily-upgrade.timer
+rm "$DIR"/lib/systemd/system/dpkg-db-backup.service
+rm "$DIR"/lib/systemd/system/dpkg-db-backup.timer
+rm "$DIR"/lib/systemd/system/systemd-tmpfiles-clean.service
+rm "$DIR"/lib/systemd/system/systemd-tmpfiles-clean.timer
+rm "$DIR"/lib/systemd/system/fstrim.service
+rm "$DIR"/lib/systemd/system/fstrim.timer
+rm "$DIR"/lib/systemd/system/e2scrub_all.service
+rm "$DIR"/lib/systemd/system/e2scrub_all.timer
+
 if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Extracting firmware rootfs.squashfs to $DIR/root/rootfs ..."
   mkdir -p "$DIR"/root/rootfs
