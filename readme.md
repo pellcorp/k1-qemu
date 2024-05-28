@@ -40,11 +40,11 @@ sudo ./start.sh
 
 ## Chroot K1 Firmware rootfs
 
-Login as ssh and do:
+If you login from the console you login as root/root.   The debian root user has a .bashrc
+which will run the chroot.sh automatically.
 
-```
-./chroot.sh
-```
+If you login via ssh once the /root/rootfs version of dropbear is started, you will need to 
+login as root/creality_2023, and you will already be in the chroot context.
 
 # Default Config
 
