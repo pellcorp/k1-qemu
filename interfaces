@@ -1,0 +1,2 @@
+auto enp0s19
+iface enp0s19 inet dhcp

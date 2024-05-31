@@ -99,24 +99,14 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends systemd procps vim-tiny net-tools inetutils-ping polkitd network-manager ifupdown iproute2 isc-dhcp-client
+chroot "$DIR" apt-get install -y --no-install-recommends sysvinit-core sysv-rc orphan-sysvinit-scripts systemctl procps vim-tiny net-tools inetutils-ping ifupdown iproute2 isc-dhcp-client
 
-cp $CURRENT_DIR/resolv.conf "$DIR"/etc
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 
-# disable a crap ton of timers
-rm "$DIR"/lib/systemd/system/apt-daily.service
-rm "$DIR"/lib/systemd/system/apt-daily.timer
-rm "$DIR"/lib/systemd/system/apt-daily-upgrade.service
-rm "$DIR"/lib/systemd/system/apt-daily-upgrade.timer
-rm "$DIR"/lib/systemd/system/dpkg-db-backup.service
-rm "$DIR"/lib/systemd/system/dpkg-db-backup.timer
-rm "$DIR"/lib/systemd/system/systemd-tmpfiles-clean.service
-rm "$DIR"/lib/systemd/system/systemd-tmpfiles-clean.timer
-rm "$DIR"/lib/systemd/system/fstrim.service
-rm "$DIR"/lib/systemd/system/fstrim.timer
-rm "$DIR"/lib/systemd/system/e2scrub_all.service
-rm "$DIR"/lib/systemd/system/e2scrub_all.timer
+cp $CURRENT_DIR/inittab "$DIR"/etc/ || exit $?
+cp $CURRENT_DIR/resolv.conf "$DIR"/etc
+cp $CURRENT_DIR/interfaces "$DIR"/etc/network/ || exit $?
+cp $CURRENT_DIR/systemd "$DIR"/etc/apt/preferences.d/
 
 if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   echo "Extracting firmware rootfs.squashfs to $DIR/root/rootfs ..."

@@ -1,0 +1,12 @@
+# prevent systemd being installed
+Package: systemd
+Pin: release *
+Pin-Priority: -1
+ 
+Package: *systemd*
+Pin: release *
+Pin-Priority: -1
+ 
+Package: systemd:i386
+Pin: release *
+Pin-Priority: -1
