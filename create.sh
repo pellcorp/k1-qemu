@@ -62,6 +62,7 @@ fi
 LANG=en_US.UTF-8
 LANGUAGE=en_US.UTF-8
 LC_ALL=en_US.UTF-8
+
 # this is because manjaro defines all these envs and causes issues!
 unset LC_PAPER
 unset LC_NUMERIC
