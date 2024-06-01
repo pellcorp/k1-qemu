@@ -12,5 +12,10 @@ mount -t devpts none /root/rootfs/dev/pts
 rm /root/rootfs/etc/resolv.conf
 cp /etc/resolv.conf /root/rootfs/etc/resolv.conf
 
-echo "Execute: 'resize' to fix console window"
+echo ""
+echo "To fix the size of the console window, run: 'resize'"
+echo "To setup default creality config files, run: '/etc/init.d/S55klipper_service start'"
+echo ""
+
 chroot /root/rootfs /bin/ash -l
+
