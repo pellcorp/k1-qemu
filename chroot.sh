@@ -18,4 +18,3 @@ echo "To setup default creality config files, run: '/etc/init.d/S55klipper_servi
 echo ""
 
 chroot /root/rootfs /bin/ash -l
-

@@ -99,9 +99,11 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends sysvinit-core sysv-rc orphan-sysvinit-scripts systemctl procps vim-tiny net-tools inetutils-ping ifupdown iproute2 isc-dhcp-client
-
+chroot "$DIR" apt-get install -y --no-install-recommends sysvinit-core sysv-rc orphan-sysvinit-scripts systemctl procps vim-tiny net-tools inetutils-ping ifupdown iproute2 isc-dhcp-client dropbear openssh-sftp-server
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
+
+# do not start dropbear by default
+rm "$DIR"/etc/rc3.d/S01dropbear
 
 cp $CURRENT_DIR/inittab "$DIR"/etc/ || exit $?
 cp $CURRENT_DIR/resolv.conf "$DIR"/etc
@@ -119,6 +121,9 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   cp $CURRENT_DIR/script "$DIR"/root/rootfs/root/script
   cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/root/script.sh
   
+  # this allows sftp sessions to work and bypass chroot.sh
+  echo "[[ $- == *i* ]] || return" >> "$DIR"/root/.bashrc
+
   # automatically chroot upon login
   echo "./chroot.sh" >> "$DIR"/root/.bashrc
 else
