@@ -122,7 +122,7 @@ if [ -f $CURRENT_DIR/rootfs.squashfs ]; then
   cp $CURRENT_DIR/script.sh "$DIR"/root/rootfs/root/script.sh
   
   # this allows sftp sessions to work and bypass chroot.sh
-  echo "[[ $- == *i* ]] || return" >> "$DIR"/root/.bashrc
+  echo '[[ $- == *i* ]] || return' >> "$DIR"/root/.bashrc
 
   # automatically chroot upon login
   echo "./chroot.sh" >> "$DIR"/root/.bashrc
