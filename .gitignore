@@ -6,3 +6,4 @@ qemu.tar.gz
 rootfs.squashfs
 rootfs.ext2
 bzImage
+build_output
