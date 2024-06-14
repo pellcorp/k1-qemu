@@ -46,3 +46,4 @@ build_output/buildroot/mips/images/start.sh
 
 I copied the basic structure of reuse for buildroots from https://github.com/xblax/flashforge_ad5m_klipper_mod
 
+This was invaluable: https://cyruscyliu.github.io/posts/2020-11-18-buildroot-qemu-x86_64/, as was this video  https://www.youtube.com/watch?v=O9RHMKJqVTg 
