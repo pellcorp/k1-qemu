@@ -4,3 +4,5 @@ vmlinux
 vmlinux.elf
 qemu.tar.gz
 rootfs.squashfs
+rootfs.ext2
+bzImage
