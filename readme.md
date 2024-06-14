@@ -1,65 +1,25 @@
-# Building qemu image
+# K1 Qemu
 
+## Debian and Chroot CrealityOS
 
-## Prerequisites
+So I have various things in this project, the original idea was a debian mips qemu image with
+chroot for creality firmware.   I have found this to be very slow.
 
-You will need qemu, qemu-user-static and qemu-user-static-binfmt or equivalent and unsquashfs
+Refer to legacy/readme.md for more information
 
-### Recreate Rootfs from Firmware
+## X86 Buildroot
 
-You will need a linux machine with the following commands available, something like ubuntu or arch is fine:
+I've started working on a X86 buildroot 2020.02.1 image which will have the same basic layout and versions of tools as CrealityOS,
+except will be X86_64 based, so should be a lot faster to test basic things like my Simple AF installer.
 
-- p7zip (7z command)
-- wget
-- unsquashfs
-- mksquashfs
+TODO
 
-The packages on ubuntu can be installed like so:
+It is a work in progress
 
-```
-sudo apt-get install p7zip squashfs-tools wget
-```
+## MIPS Buildroot
 
-Don't try and create this on windows or MacOs, you could do it on a ubuntu vm no problem
+I am also playing around with the idea of creating a MIPS kernel for build root which would allow me to directly boot the CrealityOS rootfs
+with my own kernel running the same version of linux, so far I have had mixed success, I might also just clone my X86_64 config file
+to have a MIPS based copy of CrealityOS, so I can run things like my k1 klipper without any hacks.
 
-
-### Create the Image
-
-```
-export K1_FIRMWARE_PASSWORD='the password from a certain discord'
-sudo -E ./create.sh
-```
-
-**NOTE:** You will be required to enter your `sudo` password
-
-## Running it
-
-```
-sudo ./start.sh
-```
-
-## Chroot K1 Firmware rootfs
-
-If you login from the console you login as root/root.   The debian root user has a .bashrc
-which will run the chroot.sh automatically.
-
-If you login via ssh once the /root/rootfs version of dropbear is started, you will need to 
-login as root/creality_2023, and you will already be in the chroot context.
-
-# Default Config
-
-You can get the creality firmware to setup basic printer data by running:
-
-```
-/etc/init.d/S55klipper_service start
-```
-
-## Console too narrow?
-
-After `./chroot.sh`, run the `resize` command
-
-## Links
-
-https://github.com/wtdcode/DebianOnQEMU
-https://doma.ws/debian11_mips/
-
+TODO
