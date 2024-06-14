@@ -133,6 +133,12 @@ clean_variant() {
 	rm -rf "$br_builddir"
 }
 
+package_variant() {
+    variant_env $1
+    cp $BUILDROOT_QEMU/start-$variant.sh $br_builddir/images/start.sh
+    chmod ugo+x $br_builddir/images/start.sh
+}
+
 cd $GIT_ROOT
 GIT_VERSION=$(git describe --always)
 

@@ -16,8 +16,8 @@ export BUILD_PACKAGE=$BUILD_OUT/packages
 
 export BUILDROOT_GIT=$GIT_SUBMODULES/buildroot
 export BUILDROOT_OUT=$BUILD_OUT/buildroot
-export BUILDROOT_SDK=$BUILDROOT_OUT/sdk
 export BUILDROOT_EXT=$BUILD_SCRIPTS/buildroot
+export BUILDROOT_QEMU=$BUILD_SCRIPTS/qemu
 export BUILDROOT_CONFIGS=$BUILD_SCRIPTS/buildroot/configs
 
 ### Log helper functions

@@ -22,4 +22,7 @@ I am also playing around with the idea of creating a MIPS kernel for build root 
 with my own kernel running the same version of linux, so far I have had mixed success, I might also just clone my X86_64 config file
 to have a MIPS based copy of CrealityOS, so I can run things like my k1 klipper without any hacks.
 
-TODO
+## References
+
+I copied the basic structure of reuse for buildroots from https://github.com/xblax/flashforge_ad5m_klipper_mod
+
