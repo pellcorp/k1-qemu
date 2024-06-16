@@ -754,7 +754,32 @@ BR2_PACKAGE_NETSURF_ARCH_SUPPORTS=y
 #
 # BR2_PACKAGE_PSPLASH is not set
 # BR2_PACKAGE_SDL is not set
-# BR2_PACKAGE_SDL2 is not set
+BR2_PACKAGE_SDL2=y
+
+#
+# DirectFB video driver needs directfb
+#
+
+#
+# X11 video driver needs X.org
+#
+
+#
+# KMS/DRM video driver needs libdrm
+#
+
+#
+# OpenGL support needs X11 and an OpenGL provider
+#
+
+#
+# OpenGL ES support needs an OpenGL ES provider
+#
+# BR2_PACKAGE_SDL2_GFX is not set
+# BR2_PACKAGE_SDL2_IMAGE is not set
+# BR2_PACKAGE_SDL2_MIXER is not set
+# BR2_PACKAGE_SDL2_NET is not set
+# BR2_PACKAGE_SDL2_TTF is not set
 
 #
 # Other GUIs
