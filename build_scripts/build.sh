@@ -103,7 +103,11 @@ buildroot_build_if_needed() # args: path make_command target_file
 variant_env() {
 	variant=$1
     br_builddir="$BUILDROOT_OUT/$variant"
-    br_image="$br_builddir/images/rootfs.ext2"
+    if [ "$$variant" != "mips-basic" ]; then
+        br_image="$br_builddir/images/rootfs.ext2"
+    else
+        br_image="$br_builddir/images/rootfs.tar"
+    fi
 }
 
 defconfig_variant() {
@@ -135,8 +139,10 @@ clean_variant() {
 
 package_variant() {
     variant_env $1
-    cp $BUILDROOT_QEMU/start-$variant.sh $br_builddir/images/start.sh
-    chmod ugo+x $br_builddir/images/start.sh
+    if [ "$variant" != "nginx" ]; then
+        cp $BUILDROOT_QEMU/start-$variant.sh $br_builddir/images/start.sh
+        chmod ugo+x $br_builddir/images/start.sh
+    fi
 }
 
 cd $GIT_ROOT

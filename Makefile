@@ -1,7 +1,6 @@
 SHELL := /bin/bash
 BUILD := build_scripts/build.sh
-VARIANTS = x86_64 mips
-
+VARIANTS = x86_64 mips nginx
 # Variant targets
 define VARIANT_RULES
 

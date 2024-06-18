@@ -11,7 +11,7 @@ export GIT_SUBMODULES=$GIT_ROOT
 export BUILD_SCRIPTS=$GIT_ROOT/build_scripts
 # Location for all build artifacts
 export BUILD_OUT=$GIT_ROOT/build_output
-# Location for all packaged artifcates we want to keep
+# Location for all packaged artifacts we want to keep
 export BUILD_PACKAGE=$BUILD_OUT/packages
 
 export BUILDROOT_GIT=$GIT_SUBMODULES/buildroot
