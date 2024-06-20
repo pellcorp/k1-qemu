@@ -99,7 +99,7 @@ echo "root:root" | chroot "$DIR" /usr/sbin/chpasswd
 
 echo "Installing additional packages ..."
 chroot "$DIR" apt-get update
-chroot "$DIR" apt-get install -y --no-install-recommends sysvinit-core sysv-rc orphan-sysvinit-scripts systemctl procps vim-tiny net-tools inetutils-ping ifupdown iproute2 isc-dhcp-client dropbear openssh-sftp-server
+chroot "$DIR" apt-get install -y --no-install-recommends sysvinit-core sysv-rc orphan-sysvinit-scripts systemctl procps vim-tiny net-tools xterm patchelf inetutils-ping ifupdown iproute2 isc-dhcp-client dropbear openssh-sftp-server
 chroot "$DIR" apt-get install -y --no-install-recommends linux-image-4kc-malta
 
 # do not start dropbear by default
