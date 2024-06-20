@@ -18,6 +18,8 @@ except will be X86_64 based, so should be a lot faster to test basic things like
 docker run -ti -v $PWD:$PWD pellcorp/k1-klipper-fw-build /bin/bash -c "cd $PWD && make x86_64"
 ```
 
+NOTE: This qemu image is broken, moonraker-env is wrong, and moonraker fails to start.
+
 ### Running
 
 ```
