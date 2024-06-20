@@ -591,7 +591,7 @@ BR2_PACKAGE_GIT=y
 # BR2_PACKAGE_GIT_CRYPT is not set
 # BR2_PACKAGE_GPERF is not set
 # BR2_PACKAGE_JO is not set
-# BR2_PACKAGE_JQ is not set
+BR2_PACKAGE_JQ=y
 # BR2_PACKAGE_LIBTOOL is not set
 # BR2_PACKAGE_MAKE is not set
 # BR2_PACKAGE_PKGCONF is not set
