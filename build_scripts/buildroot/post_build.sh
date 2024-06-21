@@ -12,7 +12,10 @@ if [ "$MOD_VARIANT" = "x86_64" ]; then
     tar -zxf $GIT_ROOT/prebuilt/klippy-env.tar.gz -C ${TARGET_DIR}/usr/share/
     # the rest of the env will hopefully be binary free
     cp ${TARGET_DIR}/usr/bin/python3 ${TARGET_DIR}/usr/share/klippy-env/bin/
-
-    # dont start nginx but leave the bin file
-    [ -f ${TARGET_DIR}/etc/init.d/S50nginx ] && rm ${TARGET_DIR}/etc/init.d/S50nginx
 fi
+
+# interpreter=$($VARIANT_BUILDROOT_OUT/host/usr/bin/patchelf --print-interpreter ${TARGET_DIR}/usr/sbin/nginx)
+# if [[ $interpreter != /opt* ]]; then
+#     echo "Fixing interpreter and rpath ..."
+# /usr/bin/patchelf --set-interpreter /opt${interpreter} --set-rpath '/opt/lib:/opt/usr/lib' ${TARGET_DIR}/usr/sbin/nginx
+# fi
