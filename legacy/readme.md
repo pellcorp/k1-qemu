@@ -12,11 +12,14 @@ You will need a linux machine with the following commands available, something l
 - wget
 - unsquashfs
 - mksquashfs
+- libguestfs
+- virt-make-fs
+- debootstrap
 
 The packages on ubuntu can be installed like so:
 
 ```
-sudo apt-get install p7zip squashfs-tools wget debootstrap
+sudo apt-get install p7zip squashfs-tools wget debootstrap libguestfs
 ```
 
 Don't try and create this on windows or MacOs, you could do it on a ubuntu vm no problem
