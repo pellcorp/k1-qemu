@@ -1,4 +1,5 @@
 *.qcow2
+.idea/
 initrd.img
 vmlinux
 vmlinux.elf

@@ -23,7 +23,7 @@ if [ ! -f $CURRENT_DIR/rootfs.squashfs ]; then
 #      exit 1
 #  fi
 
-  commands="7z unsquashfs mksquashfs debootstrap 7z wget"
+  commands="7z unsquashfs mksquashfs debootstrap 7z wget virt-make-fs qemu-img"
   for command in $commands; do
       command -v "$command" > /dev/null
       if [ $? -ne 0 ]; then
