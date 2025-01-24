@@ -13,15 +13,17 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+export K1_FIRMWARE_PASSWORD='$1$cxswfile$u/lZJ5DdXlEL9mVsL/rt70'
+
 # recreate the rootfs
 if [ ! -f $CURRENT_DIR/rootfs.squashfs ]; then
-  if [ -z "$K1_FIRMWARE_PASSWORD" ]; then
-      echo "Creality K1 firmware password not defined, did you forget to: "
-      echo "export K1_FIRMWARE_PASSWORD='the password from a certain discord'"
-      exit 1
-  fi
+#  if [ -z "$K1_FIRMWARE_PASSWORD" ]; then
+#      echo "Creality K1 firmware password not defined, did you forget to: "
+#      echo "export K1_FIRMWARE_PASSWORD='the password from a certain discord'"
+#      exit 1
+#  fi
 
-  commands="7z unsquashfs mksquashfs"
+  commands="7z unsquashfs mksquashfs debootstrap 7z wget"
   for command in $commands; do
       command -v "$command" > /dev/null
       if [ $? -ne 0 ]; then

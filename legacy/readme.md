@@ -16,7 +16,7 @@ You will need a linux machine with the following commands available, something l
 The packages on ubuntu can be installed like so:
 
 ```
-sudo apt-get install p7zip squashfs-tools wget
+sudo apt-get install p7zip squashfs-tools wget debootstrap
 ```
 
 Don't try and create this on windows or MacOs, you could do it on a ubuntu vm no problem
@@ -25,8 +25,7 @@ Don't try and create this on windows or MacOs, you could do it on a ubuntu vm no
 ### Create the Image
 
 ```
-export K1_FIRMWARE_PASSWORD='the password from a certain discord'
-sudo -E ./create.sh
+sudo ./create.sh
 ```
 
 **NOTE:** You will be required to enter your `sudo` password
@@ -61,4 +60,3 @@ After `./chroot.sh`, run the `resize` command
 
 https://github.com/wtdcode/DebianOnQEMU
 https://doma.ws/debian11_mips/
-
